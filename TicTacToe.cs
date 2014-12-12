@@ -8,33 +8,40 @@ public class Program
 	public static void Main()
 	{
 		
-		bool keepPlaying = false;
+		bool keepPlaying, numbersLeft;
+		string userChoice;
 		
 		do
 		{
+			keepPlaying = false;
+			numbersLeft = false;
+			
 			Console.WriteLine(gameBoard);
 			Console.WriteLine("Type a number to place an X");
-			string userChoice = Console.ReadLine();
+			userChoice = Console.ReadLine();
 			
 			GameBoardRefresh(userChoice); // Rewrite this to make gameBoard an object & have "Refresh" be a behavior?
 		
 			// Checks to see if there are still numbers in the board
-			// Why won't this work correctly?
-			for (int i=1; i==9; i++)
+			for (int i=1; i<10; i++)
 			{
 				if (gameBoard.Contains(Convert.ToString(i)))
 				{
-					keepPlaying = true;
+					numbersLeft = true;
 					break;
 				}
-				else 
-				{
-					keepPlaying = false;
-				}
 			}
-		} while (keepPlaying == false);
+			
+			if (numbersLeft)
+				keepPlaying = true;
+			else
+				keepPlaying = false;
+			
+		} while (keepPlaying);
 		
+		GameBoardRefresh(userChoice);
 		Console.WriteLine("Good job!");
+		
 	}
 	
 	public static void GameBoardRefresh(string userIn)
